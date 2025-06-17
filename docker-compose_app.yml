@@ -1,0 +1,38 @@
+version: "3.8"
+services:   
+   app_apirest:
+    build: apirest_app
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysqldb:3306/securitydb?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&useSSL=false
+      DB_NAME: securitydb
+      DB_HOSTNAME: mysqldb
+      DB_USERNAME: root
+      DB_PASSWORD: 1234
+      DB_PORT: 3306
+    restart: always
+    depends_on:
+      mysqldb:
+          condition: service_healthy
+    networks:
+      - apirest-net
+   mysqldb:
+    image: mysql:8.0.33 
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: apirest_db
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    networks:
+      - apirest-net
+
+networks:
+  apirest-net:
