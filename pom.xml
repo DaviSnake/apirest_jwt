@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.davisnake</groupId>
 	<artifactId>apirest_jwt</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>apirest_jwt</name>
-	<description>Demo project for Spring Boot</description>
+	<description></description>
 	<url/>
 	<licenses>
 		<license/>
