@@ -63,4 +63,12 @@ public class UserServices {
         }
         return null;
     }
+
+    public boolean deleteUserById(Integer id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

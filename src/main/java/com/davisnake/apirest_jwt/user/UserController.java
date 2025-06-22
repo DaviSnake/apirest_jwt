@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,5 +47,15 @@ public class UserController {
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest)
     {
         return ResponseEntity.ok(userService.updateUser(userRequest));
+    }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable Integer id) {
+        boolean eliminado = userService.deleteUserById(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Usuario eliminado");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
