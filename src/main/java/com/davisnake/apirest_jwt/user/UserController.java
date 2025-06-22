@@ -1,5 +1,7 @@
 package com.davisnake.apirest_jwt.user;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,17 @@ public class UserController {
            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(userDTO);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<UserDTO>> getAllUsers()
+    {
+        List<UserDTO> users= userService.getAllUsers();
+        if (users==null)
+        {
+           return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
     }
 
     @PutMapping()

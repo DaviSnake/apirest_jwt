@@ -1,5 +1,8 @@
 package com.davisnake.apirest_jwt.user;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -44,6 +47,19 @@ public class UserServices {
             .country(user.country)
             .build();
             return userDTO;
+        }
+        return null;
+    }
+
+    public List<UserDTO> getAllUsers(){
+
+        List<User> users = userRepository.findAll();
+
+        if (users != null){
+            return users
+                .stream()
+                .map(user -> new UserDTO(user.id, user.userName, user.firstName, user.lastName, user.country))
+                .collect(Collectors.toList());
         }
         return null;
     }
