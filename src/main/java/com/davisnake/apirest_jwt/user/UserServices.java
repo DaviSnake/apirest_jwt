@@ -51,6 +51,23 @@ public class UserServices {
         return null;
     }
 
+    public UserDTO getUserByName(String name) {
+        User user = userRepository.findByUserName(name).orElse(null);
+       
+        if (user!=null)
+        {
+            UserDTO userDTO = UserDTO.builder()
+            .id(user.id)
+            .userName(user.userName)
+            .firstName(user.firstName)
+            .lastName(user.lastName)
+            .country(user.country)
+            .build();
+            return userDTO;
+        }
+        return null;
+    }
+
     public List<UserDTO> getAllUsers(){
 
         List<User> users = userRepository.findAll();

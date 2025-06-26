@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.davisnake.apirest_jwt.jwt.JwtServices;
 import com.davisnake.apirest_jwt.user.Role;
 import com.davisnake.apirest_jwt.user.User;
+import com.davisnake.apirest_jwt.user.UserDTO;
 import com.davisnake.apirest_jwt.user.UserRepository;
+import com.davisnake.apirest_jwt.user.UserServices;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,7 @@ public class AuthServices {
 
     private final UserRepository userRepository;
     private final JwtServices jwtServices;
+    private final UserServices userServices;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
@@ -26,7 +29,9 @@ public class AuthServices {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
         UserDetails user = userRepository.findByUserName(request.getUserName()).orElseThrow();
         String token = jwtServices.getToken(user);
+        UserDTO userDTO = userServices.getUserByName(user.getUsername());
         return AuthResponse.builder()
+            .id(userDTO.getId())
             .token(token)
             .build();
     }

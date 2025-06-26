@@ -38,7 +38,7 @@ public class SecurityConfig {
                 authRequest
                     .requestMatchers(HttpMethod.GET).permitAll()
                     .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/api/v1/auth/**").permitAll()
                     .anyRequest().authenticated()
                 )
             .sessionManagement(sessionManager->
