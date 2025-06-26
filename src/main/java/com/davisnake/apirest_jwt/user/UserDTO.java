@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO {
     int id;
-    String username;
-    String firstname;
-    String lastname;
+    String userName;
+    String firstName;
+    String lastName;
     String country;
 }

@@ -41,9 +41,9 @@ public class UserServices {
         {
             UserDTO userDTO = UserDTO.builder()
             .id(user.id)
-            .username(user.userName)
-            .firstname(user.firstName)
-            .lastname(user.lastName)
+            .userName(user.userName)
+            .firstName(user.firstName)
+            .lastName(user.lastName)
             .country(user.country)
             .build();
             return userDTO;
